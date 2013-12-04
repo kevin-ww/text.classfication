@@ -2,7 +2,7 @@ package com.zx.classification;
 
 import org.apache.lucene.classification.Classifier;
 
-public class ClassificationResult<T> implements Comparable<T>{
+public class ClassificationResult<T> implements Comparable<T> {
 
   private T assignedClass;
   private double score;

@@ -1,0 +1,12 @@
+[PropertyInfo]
+handles,List,false,false, , ,true,<default>
+objects,List,false,false, , ,true,<default>
+ruleExecutionSetMetadata,RuleExecutionSetMetadata,false,false, , ,true,<default>
+ruleSet,RuleExecutionSetImpl,false,false, , ,false,<default>
+type,int,false,false, , ,true,<default>
+workingMemory,Hashtable,false,false, , ,false,<default>
+[IconNames]
+
+
+
+

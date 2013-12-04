@@ -2,7 +2,7 @@ package com.zx.classification;
 
 import java.io.Serializable;
 
-public class Instance<T> implements Cloneable, Serializable, Comparable<T>{
+public class Instance<T> implements Cloneable, Serializable, Comparable<T> {
 
   /**
    * 

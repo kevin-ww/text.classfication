@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule-execution-set>
+   <name>RuleExecutionSet1</name>
+   <description>Rule Execution Set</description>
+
+   <synonymn name="form" class="example2.Example2Frame" />
+
+    <!--
+      If the credit limit of the customer is greater or equals to the amount of the
+      invoice and the status of the invoice is "unpaid" then
+      decrement the credit limit with the amount of the invoice and
+      set the status of the invoice to "paid".
+    -->
+   <rule name="Rule1" description="credit limit control rule" >
+	<if leftTerm="form.getCreditLimit" op="&gt;=" rightTerm="form.getAmount" />
+	<if leftTerm="form.getStatus" op="=" rightTerm="unpaid" />
+	<then method="form.decrementCreditLimit" arg1="form.getAmount" />
+	<then method="form.setStatus" arg1="paid" />
+   </rule>
+
+    <!--
+      If the credit limit of the customer is less or equals to zero
+      then
+      disable new invoice input control.
+    -->
+   <rule name="Rule2" description="credit limit disabilitation rule" >
+	<if leftTerm="form.getCreditLimit" op="&lt;=" rightTerm="0" />
+	<then method="form.disableInvoice"  />
+   </rule>
+
+    <!--
+      If the credit limit of the customer is greater than zero
+      then
+      enable new invoice input control.
+    -->
+   <rule name="Rule2" description="credit limit abilitation rule" >
+	<if leftTerm="form.getCreditLimit" op="&gt;" rightTerm="0" />
+	<then method="form.enableInvoice"  />
+   </rule>
+</rule-execution-set>

@@ -2,7 +2,7 @@ package com.zx.classification.stemmers;
 
 import java.io.Serializable;
 
-public interface Stemmer  extends Serializable{
+public interface Stemmer extends Serializable {
 
   /**
    * Stems the given word and returns the stemmed version

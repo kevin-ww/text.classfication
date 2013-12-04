@@ -1,0 +1,1 @@
+java -cp .:../lib/jsr94.jar:../lib/jruleengine.jar example2.Example2

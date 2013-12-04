@@ -4,42 +4,43 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.wltea.analyzer.IKSegmentation;
-import org.wltea.analyzer.Lexeme;
+import org.wltea.analyzer.core.IKSegmenter;
+import org.wltea.analyzer.core.Lexeme;
 
-public class IKTokenizer{
+//import org.wltea.analyzer.IKSegmentation;
+//import org.wltea.analyzer.Lexeme;
 
-  // 当为true时，分词器进行最大词长切分
-  public static final boolean IS_USING_MAX_WORD_LENGTH = true;
+public class IKTokenizer {
+
+  // useSmart 为true，使用智能分词策略
+  public static final boolean IS_USING_SMART = true;
 
   public static Collection<String> tokenize(String text) throws Exception {
-    return tokenize(text, IS_USING_MAX_WORD_LENGTH);
+    return tokenize(text, IS_USING_SMART);
   }
 
-  public static Collection<String> tokenize(String text,
-      boolean isUsingMaxWordLength) throws Exception {
-    
+  public static Collection<String> tokenize(String text, boolean isUsingSmart)
+      throws Exception {
+
     StringReader reader = new StringReader(text);
 
-    IKSegmentation ik = new IKSegmentation(reader, isUsingMaxWordLength);
-
+    IKSegmenter ik = new IKSegmenter(reader, isUsingSmart);
     Lexeme lexeme = null;
-
     Collection<String> tokens = new ArrayList<String>();
-
     while ((lexeme = ik.next()) != null) {
       tokens.add(lexeme.getLexemeText());
     }
+
     return tokens;
   }
 
   public static void main(String[] args) throws Exception {
-    
+
     String testStr = "基于配置的词典扩充. 项目结构图如下";
 
     Collection<String> tokens = IKTokenizer.tokenize(testStr);
 
-    System.out.println(tokens);
+    System.out.println("tokens" + tokens);
 
   }
 

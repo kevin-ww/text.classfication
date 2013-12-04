@@ -1,4 +1,4 @@
-import com.zx.classification.impl.fs.SimpleNavieBayesClassifier;
+import com.zx.classification.impl.fs.FSNavieBayesClassifier;
 import com.zx.classification.impl.fs.TrainningDataSet;
 
 import junit.framework.TestCase;
@@ -38,10 +38,10 @@ public class SimpleNavieBayesClassifierUT extends TestCase {
 
     String text = "戴尔公司一些产品打折力度很大。戴尔公司首席执行官凯文";
 
-    SimpleNavieBayesClassifier classifier = new SimpleNavieBayesClassifier();
-    
+    FSNavieBayesClassifier classifier = new FSNavieBayesClassifier();
+
     classifier.applyTrainSet(trainingDataSet);
-    
+
     classifier.classify(text);
 
   }
