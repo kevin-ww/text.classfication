@@ -8,33 +8,37 @@ import javax.rules.*;
 import java.rmi.*;
 import java.util.*;
 
-
 /**
- * <p>Title: JRuleEngine Project</p>
- * <p>Description: Frame used to view customer and invoice input controls.
- * When user clicks on "Calculate" button the rule engine is called.</p>
- * <p>Copyright: Copyright (C) 2006 Mauro Carniel</p>
- *
- * <p> This file is part of JRuleEngine project.
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the (LGPL) Lesser General Public
- * License as published by the Free Software Foundation;
- *
- *                GNU LESSER GENERAL PUBLIC LICENSE
- *                 Version 2.1, February 1999
- *
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Library General Public License for more details.
- *
- * You should have received a copy of the GNU Library General Public
- * License along with this library; if not, write to the Free
- * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- *
- *       The author may be contacted at:
- *           maurocarniel@tin.it</p>
- *
+ * <p>
+ * Title: JRuleEngine Project
+ * </p>
+ * <p>
+ * Description: Frame used to view customer and invoice input controls. When
+ * user clicks on "Calculate" button the rule engine is called.
+ * </p>
+ * <p>
+ * Copyright: Copyright (C) 2006 Mauro Carniel
+ * </p>
+ * 
+ * <p>
+ * This file is part of JRuleEngine project. This library is free software; you
+ * can redistribute it and/or modify it under the terms of the (LGPL) Lesser
+ * General Public License as published by the Free Software Foundation;
+ * 
+ * GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
+ * 
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Library General Public License for more
+ * details.
+ * 
+ * You should have received a copy of the GNU Library General Public License
+ * along with this library; if not, write to the Free Software Foundation, Inc.,
+ * 675 Mass Ave, Cambridge, MA 02139, USA.
+ * 
+ * The author may be contacted at: maurocarniel@tin.it
+ * </p>
+ * 
  * @author Mauro Carniel
  * @version 1.0
  */
@@ -57,8 +61,6 @@ public class Example5Frame extends JFrame {
 
   Example5 controller = null;
 
-
-
   public Example5Frame(Example5 controller) {
     super("Customer Credit Limit");
     creditLimitControl.setName("creditLimitControl");
@@ -68,26 +70,24 @@ public class Example5Frame extends JFrame {
       this.controller = controller;
       init();
       jbInit();
-      setSize(400,200);
+      setSize(400, 200);
       setLocation(
-          (int)(Toolkit.getDefaultToolkit().getScreenSize().getWidth()-getSize().getWidth())/2,
-          (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()-getSize().getHeight())/2
-      );
+          (int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() - getSize()
+              .getWidth()) / 2, (int) (Toolkit.getDefaultToolkit()
+              .getScreenSize().getHeight() - getSize().getHeight()) / 2);
       setVisible(true);
-    }
-    catch(Exception e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }
 
-
   private void init() {
-    DefaultComboBoxModel model = new DefaultComboBoxModel(new String[]{"unpaid","paid"});
+    DefaultComboBoxModel model = new DefaultComboBoxModel(new String[] {
+        "unpaid", "paid" });
     statusControl.setModel(model);
     statusControl.setSelectedIndex(0);
 
   }
-
 
   private void jbInit() throws Exception {
     titledBorder1 = new TitledBorder("");
@@ -110,18 +110,18 @@ public class Example5Frame extends JFrame {
     titledBorder2.setTitleColor(Color.blue);
     calcButton.setMnemonic('C');
     calcButton.setText("Calculate");
-    calcButton.addActionListener(new Example5Frame_calcButton_actionAdapter(this));
+    calcButton.addActionListener(new Example5Frame_calcButton_actionAdapter(
+        this));
     this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-    this.getContentPane().add(customerPanel,  BorderLayout.NORTH);
+    this.getContentPane().add(customerPanel, BorderLayout.NORTH);
     customerPanel.add(creditLimitLabel, null);
     customerPanel.add(creditLimitControl, null);
-    this.getContentPane().add(invoicePanel,  BorderLayout.CENTER);
+    this.getContentPane().add(invoicePanel, BorderLayout.CENTER);
     invoicePanel.add(amountLabel, null);
     invoicePanel.add(amountControl, null);
     invoicePanel.add(statusControl, null);
     invoicePanel.add(calcButton, null);
   }
-
 
   void calcButton_actionPerformed(ActionEvent e) {
     try {
@@ -130,21 +130,21 @@ public class Example5Frame extends JFrame {
       controller.getStatefulRuleSession().addObject(creditLimitControl);
       controller.getStatefulRuleSession().addObject(statusControl);
 
-      System.out.println( "Called addObject on Stateful Rule Session: " + controller.getStatefulRuleSession() );
+      System.out.println("Called addObject on Stateful Rule Session: "
+          + controller.getStatefulRuleSession());
 
       controller.getStatefulRuleSession().executeRules();
-      System.out.println( "Called executeRules" );
+      System.out.println("Called executeRules");
 
       // extract the Objects from the statefulRuleSession
       java.util.List results = controller.getStatefulRuleSession().getObjects();
-      System.out.println( "Result of calling getObjects: " + results.size() + " results." );
+      System.out.println("Result of calling getObjects: " + results.size()
+          + " results.");
 
-    }
-    catch (Exception ex) {
+    } catch (Exception ex) {
       ex.printStackTrace();
     }
   }
-
 
   public final void disableInvoice() {
     amountControl.setEnabled(false);
@@ -152,26 +152,22 @@ public class Example5Frame extends JFrame {
     calcButton.setEnabled(false);
   }
 
-
   public final void enableInvoice() {
     amountControl.setEnabled(true);
     statusControl.setEnabled(true);
     calcButton.setEnabled(true);
   }
 
-
 }
 
-
-
-
-
-class Example5Frame_calcButton_actionAdapter implements java.awt.event.ActionListener {
+class Example5Frame_calcButton_actionAdapter implements
+    java.awt.event.ActionListener {
   Example5Frame adaptee;
 
   Example5Frame_calcButton_actionAdapter(Example5Frame adaptee) {
     this.adaptee = adaptee;
   }
+
   public void actionPerformed(ActionEvent e) {
     adaptee.calcButton_actionPerformed(e);
   }
